@@ -1,8 +1,10 @@
+import "bootstrap/dist/css/bootstrap.css";
+
 import "./App.css";
-import Posts from "./components/Posts/Posts";
+import Yaps from "./components/Yaps";
 
 function App() {
-  return <Posts />;
+  return <Yaps />;
 }
 
 export default App;
