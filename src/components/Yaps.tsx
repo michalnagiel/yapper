@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getPosts } from "../api/apiService";
 
 import Yap from "./Yap";
+import LogInForm from "./LogInForm";
 
 import { Post } from "../types/types";
 
@@ -36,7 +37,7 @@ function Posts() {
 
   return (
     <div>
-      <h1>Yaps</h1>
+      <LogInForm/>
       {posts
         .slice()
         .reverse()

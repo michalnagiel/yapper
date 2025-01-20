@@ -10,3 +10,9 @@ export interface Post {
   created_at: string;
   hashtags: Hashtag[];
 }
+
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+}
