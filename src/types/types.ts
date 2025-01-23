@@ -16,3 +16,12 @@ export interface User {
   username: string;
   email: string;
 }
+
+export interface Comment {
+  id: number;
+  content: string;
+  author: string;
+  created_at: string;
+  likes_count: string;
+  is_liked: string;
+}

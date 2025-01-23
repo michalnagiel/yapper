@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Post } from "../types/types";
 import DeleteYap from "./DeleteYap";
+import Comments from "./Comments";
 
 interface YapProps {
   post: Post;
@@ -10,13 +11,16 @@ interface YapProps {
 function Yap(props: YapProps) {
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
 
-  const isAuthor = localStorage.getItem("username") === props.post.author.toString();
+  const isAuthor =
+    localStorage.getItem("username") === props.post.author.toString();
 
   const handleDeleteYap = () => {
     setIsDeleted(true);
     props.onDeleteYap(props.post.id);
   };
   if (isDeleted) return null;
+
+
   return (
     <div className="card border-dark mb-3">
       <div className="card-header">
@@ -29,11 +33,9 @@ function Yap(props: YapProps) {
         <p>{props.post.hashtags.map((tag) => `#${tag.name}`).join(", ")}</p>
       </div>
       {isAuthor ? (
-          <DeleteYap
-            yapId={props.post.id}
-            onDeleteYap={handleDeleteYap}
-          />
-        ) : null}
+        <DeleteYap yapId={props.post.id} onDeleteYap={handleDeleteYap} />
+      ) : null}
+      <Comments yapId={props.post.id} />
     </div>
   );
 }
