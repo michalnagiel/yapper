@@ -28,7 +28,10 @@ export default function LogInForm(props: any) {
       const response = await postLogin(username, password);
       console.log("Login successful:", response);
 
-      localStorage.setItem("token", JSON.stringify(response.access));
+      localStorage.setItem(
+        "token",
+        JSON.stringify(response.access).slice(1, -1)
+      );
       localStorage.setItem("username", username);
 
       const users = await getUsers();
