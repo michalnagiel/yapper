@@ -28,6 +28,7 @@ export default function AddComment(props: CreateCommentProps) {
         created_at: response.created_at,
         likes_count: response.likes_count,
         is_liked: response.is_liked,
+        liked_by: response.liked_by,
       });
       setContent("");
     } catch (error) {

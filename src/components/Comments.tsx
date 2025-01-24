@@ -71,6 +71,7 @@ export default function Comments(props: CommentsProps) {
               <CommentCard
                 key={comment.id}
                 comment={comment}
+                likedBy={comment.liked_by}
                 onDeleteComment={handleDeleteComment}
                 onUserSelection={props.onUserSelection}
               />

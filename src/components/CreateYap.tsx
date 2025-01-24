@@ -34,6 +34,7 @@ export default function CreateYap(props: CreateYapProps) {
         author: response.author,
         created_at: response.created_at,
         hashtags: response.hashtags,
+        liked_by: response.liked_by,
       });
       setContent("");
     } catch (error) {

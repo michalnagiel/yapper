@@ -104,7 +104,8 @@ function Yap(props: YapProps) {
           </p>
           <YapStatistics
             comments={numberOfComments}
-            likes={0}
+            likedBy={props.post.liked_by}
+            yapId={props.post.id}
             onCommentPictogramClick={handleShowAddCommentComponentToggle}
           />
           <Comments

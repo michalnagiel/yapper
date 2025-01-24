@@ -8,7 +8,6 @@ interface DeleteCommentProps {
 export default function DeleteComment(props: DeleteCommentProps) {
   async function handleDeleteComment(): Promise<void> {
     try {
-      console.log(props.commentId);
       await deleteComment(props.commentId);
       props.onDeleteComment(props.commentId);
     } catch (error) {

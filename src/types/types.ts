@@ -9,6 +9,7 @@ export interface Post {
   author: string;
   created_at: string;
   hashtags: Hashtag[];
+  liked_by: string[];
 }
 
 export interface User {
@@ -24,4 +25,5 @@ export interface Comment {
   created_at: string;
   likes_count: string;
   is_liked: string;
+  liked_by: string[];
 }
