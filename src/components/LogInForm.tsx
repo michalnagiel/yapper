@@ -71,7 +71,12 @@ export default function LogInForm(props: LogInFormProps) {
       <>
         <div>
           <div className="logged">
-            <span>You are logged as: <span className="username">@{localStorage.getItem("username")}</span></span>
+            <span>
+              You are logged as:{" "}
+              <span className="username">
+                @{localStorage.getItem("username")}
+              </span>
+            </span>
             <button className="btn btn-outline-danger" onClick={handleLogout}>
               Logout
             </button>

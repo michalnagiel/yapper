@@ -82,7 +82,12 @@ function Yap(props: YapProps) {
       <div className="card border-dark mb-3">
         <div className="card-header">
           <span>
-            <span className="username" onClick={() => props.onUserSelection(props.post.author)}>@{props.post.author} </span>
+            <span
+              className="username"
+              onClick={() => props.onUserSelection(props.post.author)}
+            >
+              @{props.post.author}{" "}
+            </span>
             <span>
               {new Intl.DateTimeFormat("pl-PL", {
                 hour: "2-digit",

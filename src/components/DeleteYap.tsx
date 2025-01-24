@@ -18,7 +18,10 @@ export default function DeleteYap(props: DeleteYapProps) {
 
   return (
     <>
-      <button className="btn btn-outline-danger btn-sm" onClick={handleDeleteYap}>
+      <button
+        className="btn btn-outline-danger btn-sm"
+        onClick={handleDeleteYap}
+      >
         Delete Yap
       </button>
     </>

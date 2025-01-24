@@ -18,7 +18,10 @@ export default function DeleteComment(props: DeleteCommentProps) {
 
   return (
     <>
-      <button className="btn btn-outline-danger btn-sm" onClick={handleDeleteComment}>
+      <button
+        className="btn btn-outline-danger btn-sm"
+        onClick={handleDeleteComment}
+      >
         Delete Comment
       </button>
     </>
