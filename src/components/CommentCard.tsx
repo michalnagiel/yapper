@@ -6,7 +6,8 @@ import "../styles/CommentCard.scss";
 
 interface CommentCardProps {
   comment: Comment;
-  onDeleteComment(id: number): void;
+  onDeleteComment: (id: number) => void;
+  onUserSelection: (username: string) => void;
 }
 
 export default function CommentCard(props: CommentCardProps) {
@@ -24,7 +25,7 @@ export default function CommentCard(props: CommentCardProps) {
   return (
     <div className="comment-card">
       <div className="comment">
-        <span className="username">@{props.comment.author}: </span>
+        <span className="username" onClick={() => props.onUserSelection(props.comment.author)}>@{props.comment.author}: </span>
         <span>{props.comment.content}</span>
       </div>
       <div className="delete-comment">

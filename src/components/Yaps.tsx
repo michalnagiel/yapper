@@ -18,6 +18,7 @@ export default function Yaps(props: YapsProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedHashtag, setSelectedHashtag] = useState<number>(0);
+  const [selectedUser, setSelectedUser] = useState<string>("");
 
   const handleCreateYap = (newYap: Post) => {
     setYaps((prevYaps) => [newYap, ...prevYaps]);
@@ -29,6 +30,22 @@ export default function Yaps(props: YapsProps) {
 
   const handleHashtagSelection = (id: number) => {
     setSelectedHashtag(id);
+  };
+
+  const handleUserSelection = (username: string) => {
+    setSelectedUser(username);
+  };
+
+  const getSelectedHashtagName = () => {
+    for (let yap of yaps) {
+      const hashtag = yap.hashtags.find(
+        (hashtag) => hashtag.id === selectedHashtag
+      );
+      if (hashtag) {
+        return hashtag.name;
+      }
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -62,15 +79,13 @@ export default function Yaps(props: YapsProps) {
         <CreateYap onCreateYap={handleCreateYap} />
       ) : null}
       {selectedHashtag !== 0 ? (
-        <div
-          onClick={() => setSelectedHashtag(0)}
-          style={{
-            cursor: "pointer",
-            color: "blue",
-            textDecoration: "underline",
-          }}
-        >
-          Remove selected hashtag
+        <div className="selected-hashtag" onClick={() => setSelectedHashtag(0)}>
+          Selected hashtag: {getSelectedHashtagName()}. Click to remove.
+        </div>
+      ) : null}
+      {selectedUser !== "" ? (
+        <div className="selected-hashtag" onClick={() => setSelectedUser("")}>
+          Selected user: {selectedUser}. Click to remove.
         </div>
       ) : null}
       {yaps.slice().map((yap) => (
@@ -79,7 +94,9 @@ export default function Yaps(props: YapsProps) {
           post={yap}
           onDeleteYap={handleDeleteYap}
           selectedHashtag={selectedHashtag}
+          selectedUser={selectedUser}
           onHashtagSelection={handleHashtagSelection}
+          onUserSelection={handleUserSelection}
         />
       ))}
     </div>

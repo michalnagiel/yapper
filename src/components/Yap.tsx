@@ -8,8 +8,10 @@ import "../styles/Yap.scss";
 interface YapProps {
   post: Post;
   selectedHashtag: number;
+  selectedUser: string;
   onDeleteYap: (id: number) => void;
   onHashtagSelection: (id: number) => void;
+  onUserSelection: (username: string) => void;
 }
 
 function Yap(props: YapProps) {
@@ -70,14 +72,17 @@ function Yap(props: YapProps) {
   if (isDeleted) return null;
 
   if (
-    props.selectedHashtag === 0 ||
-    props.post.hashtags.some((hashtag) => hashtag.id === props.selectedHashtag)
+    (props.selectedHashtag === 0 ||
+      props.post.hashtags.some(
+        (hashtag) => hashtag.id === props.selectedHashtag
+      )) &&
+    (props.selectedUser === "" || props.post.author === props.selectedUser)
   ) {
     return (
       <div className="card border-dark mb-3">
         <div className="card-header">
           <span>
-            <span className="username">@{props.post.author} </span>
+            <span className="username" onClick={() => props.onUserSelection(props.post.author)}>@{props.post.author} </span>
             <span>
               {new Intl.DateTimeFormat("pl-PL", {
                 hour: "2-digit",
@@ -107,6 +112,7 @@ function Yap(props: YapProps) {
             onNumberOfCommentsUpdate={handleNumberOfCommentsUpdate}
             onAddComment={handleAddComment}
             onDeleteComment={handleDeleteComment}
+            onUserSelection={props.onUserSelection}
             showAddCommentComponent={showAddCommentComponent}
           />
         </div>

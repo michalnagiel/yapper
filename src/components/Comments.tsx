@@ -12,6 +12,7 @@ interface CommentsProps {
   onNumberOfCommentsUpdate: (numberOfComments: number) => void;
   onAddComment: () => void;
   onDeleteComment: () => void;
+  onUserSelection: (username: string) => void;
 }
 
 export default function Comments(props: CommentsProps) {
@@ -71,6 +72,7 @@ export default function Comments(props: CommentsProps) {
                 key={comment.id}
                 comment={comment}
                 onDeleteComment={handleDeleteComment}
+                onUserSelection={props.onUserSelection}
               />
             ))
         )}
