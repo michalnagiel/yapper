@@ -1,0 +1,14 @@
+.create-yap-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.create-yap-input {
+    flex: 1;
+}
+
+.create-yap-button {
+    flex-shrink: 0;
+}

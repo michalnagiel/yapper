@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { addPost } from "../api/apiService";
-import { Post } from "../types/types"
+import { Post } from "../types/types";
+
+import "../styles/CreateYap.scss";
 
 interface CreateYapProps {
   onCreateYap: (post: Post) => void;
@@ -8,20 +10,21 @@ interface CreateYapProps {
 
 export default function CreateYap(props: CreateYapProps) {
   const [content, setContent] = useState<string>("");
-  const [hashtags, setHashtags] = useState<string[]>([]);
 
   const handleContentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setContent(event.target.value);
   };
 
-  const handleHashtagsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    const hashtagArray = input.split(" ").filter((tag) => tag.trim() !== "");
-    setHashtags(hashtagArray);
+  const extractHashtags = (text: string): string[] => {
+    const regex = /#\w+/g;
+    const hashtags = text.match(regex) || [];
+    return hashtags.map((tag) => tag.slice(1));
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const hashtags = extractHashtags(content);
+
     try {
       const response = await addPost(content, hashtags);
       console.log("Post added successfully: ", response);
@@ -33,7 +36,6 @@ export default function CreateYap(props: CreateYapProps) {
         hashtags: response.hashtags,
       });
       setContent("");
-      setHashtags([]);
     } catch (error) {
       console.log("Error adding post: ", error);
     }
@@ -41,19 +43,21 @@ export default function CreateYap(props: CreateYapProps) {
 
   return (
     <div>
-      <h2>Create Yap</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Yap content:</label>
-        <input type="text" value={content} onChange={handleContentChange} placeholder="Enter Yap content"/>
-        <label>Hashtags:</label>
+      <form className="create-yap-form" onSubmit={handleSubmit}>
         <input
+          className="create-yap-input"
           type="text"
-          value={hashtags}
-          onChange={handleHashtagsChange}
-          placeholder="Enter hashtags separated by spaces"
+          value={content}
+          onChange={handleContentChange}
+          placeholder="Enter Yap Content"
+          maxLength={140}
         />
-        <p>Current hashtags: {hashtags.map((tag) => `#${tag}`).join(" ")}</p>
-        <button type="submit">Create Yap</button>
+        <button
+          className="create-yap-button btn btn-outline-primary"
+          type="submit"
+        >
+          Create Yap
+        </button>
       </form>
     </div>
   );

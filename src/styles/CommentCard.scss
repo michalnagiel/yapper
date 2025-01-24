@@ -1,0 +1,14 @@
+.comment-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.comment {
+    flex: 1;
+}
+
+.delete-comment-button {
+    flex-shrink: 0;
+}

@@ -7,10 +7,17 @@ import LogInForm from "./LogInForm";
 import { Post } from "../types/types";
 import CreateYap from "./CreateYap";
 
-export default function Yaps() {
+import "../styles/Yaps.scss";
+
+interface YapsProps {
+  onAuthenticationChange: () => void;
+}
+
+export default function Yaps(props: YapsProps) {
   const [yaps, setYaps] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedHashtag, setSelectedHashtag] = useState<number>(0);
 
   const handleCreateYap = (newYap: Post) => {
     setYaps((prevYaps) => [newYap, ...prevYaps]);
@@ -18,6 +25,10 @@ export default function Yaps() {
 
   const handleDeleteYap = (yapId: number) => {
     setYaps((prevYaps) => prevYaps.filter((yap) => yap.id !== yapId));
+  };
+
+  const handleHashtagSelection = (id: number) => {
+    setSelectedHashtag(id);
   };
 
   useEffect(() => {
@@ -45,14 +56,32 @@ export default function Yaps() {
   }
 
   return (
-    <div>
-      <LogInForm />
-      <CreateYap onCreateYap={handleCreateYap} />
-      {yaps
-        .slice()
-        .map((yap) => (
-          <Yap key={yap.id} post={yap} onDeleteYap={handleDeleteYap} />
-        ))}
+    <div className="yaps-card">
+      <LogInForm onAuthenticationChange={props.onAuthenticationChange} />
+      {localStorage.getItem("token") ? (
+        <CreateYap onCreateYap={handleCreateYap} />
+      ) : null}
+      {selectedHashtag !== 0 ? (
+        <div
+          onClick={() => setSelectedHashtag(0)}
+          style={{
+            cursor: "pointer",
+            color: "blue",
+            textDecoration: "underline",
+          }}
+        >
+          Remove selected hashtag
+        </div>
+      ) : null}
+      {yaps.slice().map((yap) => (
+        <Yap
+          key={yap.id}
+          post={yap}
+          onDeleteYap={handleDeleteYap}
+          selectedHashtag={selectedHashtag}
+          onHashtagSelection={handleHashtagSelection}
+        />
+      ))}
     </div>
   );
 }

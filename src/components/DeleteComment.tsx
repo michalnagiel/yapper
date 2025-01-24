@@ -8,7 +8,7 @@ interface DeleteCommentProps {
 export default function DeleteComment(props: DeleteCommentProps) {
   async function handleDeleteComment(): Promise<void> {
     try {
-      console.log(props.commentId)
+      console.log(props.commentId);
       await deleteComment(props.commentId);
       props.onDeleteComment(props.commentId);
     } catch (error) {
@@ -19,8 +19,8 @@ export default function DeleteComment(props: DeleteCommentProps) {
 
   return (
     <>
-      <button className="btn btn-danger btn-sm" onClick={handleDeleteComment}>
-        Delete Comment {props.commentId}
+      <button className="btn btn-outline-danger btn-sm" onClick={handleDeleteComment}>
+        Delete Comment
       </button>
     </>
   );

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Comment } from "../types/types";
 import DeleteComment from "./DeleteComment";
 
+import "../styles/CommentCard.scss";
+
 interface CommentCardProps {
   comment: Comment;
   onDeleteComment(id: number): void;
@@ -17,18 +19,22 @@ export default function CommentCard(props: CommentCardProps) {
     setIsDeleted(true);
     props.onDeleteComment(props.comment.id);
   };
-  
+
   if (isDeleted) return null;
   return (
-    <div>
-      <span>{props.comment.author}: </span>
-      <span>{props.comment.content}</span>
-      {isAuthor ? (
-        <DeleteComment
-          commentId={props.comment.id}
-          onDeleteComment={handleDeleteComment}
-        />
-      ) : null}
+    <div className="comment-card">
+      <div className="comment">
+        <span className="username">@{props.comment.author}: </span>
+        <span>{props.comment.content}</span>
+      </div>
+      <div className="delete-comment">
+        {isAuthor ? (
+          <DeleteComment
+            commentId={props.comment.id}
+            onDeleteComment={handleDeleteComment}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

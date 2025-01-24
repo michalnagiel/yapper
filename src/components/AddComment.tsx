@@ -2,6 +2,8 @@ import { useState } from "react";
 import { postComment } from "../api/apiService";
 import { Comment } from "../types/types";
 
+import "../styles/AddComment.scss";
+
 interface CreateCommentProps {
   yapId: number;
   onPostComment: (post: Comment) => void;
@@ -35,16 +37,20 @@ export default function AddComment(props: CreateCommentProps) {
 
   return (
     <div>
-      <h2>Add comment</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Comment content</label>
+      <form className="add-comment-form" onSubmit={handleSubmit}>
         <input
+          className="add-comment-input"
           type="text"
           value={content}
           onChange={handleContentChange}
           placeholder="Enter comment content"
         />
-        <button type="submit">Add Comment</button>
+        <button
+          className="add-comment-button btn btn-outline-primary"
+          type="submit"
+        >
+          Add Comment
+        </button>
       </form>
     </div>
   );

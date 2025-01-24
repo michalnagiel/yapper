@@ -3,11 +3,15 @@ import { getUsers, postLogin } from "../api/apiService";
 import { useState } from "react";
 import SignUpForm from "./SignUpForm";
 
-//import "./LoginForm.scss";
+import "../styles/LogInForm.scss";
 
 import { User } from "../types/types";
 
-export default function LogInForm(props: any) {
+interface LogInFormProps {
+  onAuthenticationChange: () => void;
+}
+
+export default function LogInForm(props: LogInFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -44,11 +48,10 @@ export default function LogInForm(props: any) {
         throw new Error("User ID not found.");
       }
 
-      //console.log(getUsers().toString());
       setIsAuthenticated(true);
-      //props.onRefresh();
       setUsername("");
       setPassword("");
+      props.onAuthenticationChange();
     } catch (error) {
       console.error("Login failed:", error);
       alert(error);
@@ -60,7 +63,7 @@ export default function LogInForm(props: any) {
     localStorage.removeItem("username");
     localStorage.removeItem("userId");
     setIsAuthenticated(false);
-    props.onRefresh();
+    props.onAuthenticationChange();
   }
 
   if (isAuthenticated)
@@ -68,10 +71,8 @@ export default function LogInForm(props: any) {
       <>
         <div>
           <div className="logged">
-            <div>
-              <h5>You are logged as: {localStorage.getItem("username")}</h5>
-            </div>
-            <button className="btn btn-danger" onClick={handleLogout}>
+            <span>You are logged as: <span className="username">@{localStorage.getItem("username")}</span></span>
+            <button className="btn btn-outline-danger" onClick={handleLogout}>
               Logout
             </button>
           </div>
