@@ -11,6 +11,7 @@ import "../styles/Yaps.scss";
 
 interface YapsProps {
   onAuthenticationChange: () => void;
+  isAuthenticated: boolean;
 }
 
 export default function Yaps(props: YapsProps) {
@@ -49,6 +50,8 @@ export default function Yaps(props: YapsProps) {
   };
 
   useEffect(() => {
+    let intervalId;
+  
     const fetchPosts = async () => {
       try {
         const data = await getPosts();
@@ -60,9 +63,16 @@ export default function Yaps(props: YapsProps) {
         setLoading(false);
       }
     };
-
+  
     fetchPosts();
+
+    intervalId = setInterval(fetchPosts, 1000);
+  
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -109,6 +119,8 @@ export default function Yaps(props: YapsProps) {
           selectedUser={selectedUser}
           onHashtagSelection={handleHashtagSelection}
           onUserSelection={handleUserSelection}
+          onAuthenticationChange={props.onAuthenticationChange}
+          isAuthenticated={props.isAuthenticated}
         />
       ))}
     </div>

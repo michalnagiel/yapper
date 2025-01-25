@@ -15,6 +15,7 @@ interface CommentsProps {
   onAddComment: () => void;
   onDeleteComment: () => void;
   onUserSelection: (username: string) => void;
+  isAuthenticated: boolean;
 }
 
 export default function Comments(props: CommentsProps) {
@@ -76,6 +77,7 @@ export default function Comments(props: CommentsProps) {
                 likedBy={comment.liked_by}
                 onDeleteComment={handleDeleteComment}
                 onUserSelection={props.onUserSelection}
+                isAuthenticated={props.isAuthenticated}
               />
             ))
         )}

@@ -31,7 +31,6 @@ export default function LogInForm(props: LogInFormProps) {
   async function handleLogin(): Promise<void> {
     try {
       const response = await postLogin(username, password);
-      console.log("Login successful:", response);
 
       localStorage.setItem(
         "token",
@@ -40,7 +39,6 @@ export default function LogInForm(props: LogInFormProps) {
       localStorage.setItem("username", username);
 
       const users = await getUsers();
-      console.log(users);
       const userId = getUserId(username, users);
 
       if (userId !== null) {

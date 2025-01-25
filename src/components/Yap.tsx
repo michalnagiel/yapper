@@ -9,12 +9,14 @@ import { Post } from "../types/types";
 import "../styles/Yap.scss";
 
 interface YapProps {
+  isAuthenticated: boolean;
   post: Post;
   selectedHashtag: number;
   selectedUser: string;
   onDeleteYap: (id: number) => void;
   onHashtagSelection: (id: number) => void;
   onUserSelection: (username: string) => void;
+  onAuthenticationChange: () => void;
 }
 
 function Yap(props: YapProps) {
@@ -115,6 +117,7 @@ function Yap(props: YapProps) {
             likedBy={props.post.liked_by}
             yapId={props.post.id}
             onCommentPictogramClick={handleShowAddCommentComponentToggle}
+            isAuthenticated={props.isAuthenticated}
           />
           <Comments
             yapId={props.post.id}
@@ -123,6 +126,7 @@ function Yap(props: YapProps) {
             onDeleteComment={handleDeleteComment}
             onUserSelection={props.onUserSelection}
             showAddCommentComponent={showAddCommentComponent}
+            isAuthenticated={props.isAuthenticated}
           />
         </div>
       </div>

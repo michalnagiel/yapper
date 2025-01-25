@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { commentToggleLike } from "../api/apiService";
 
 import DeleteComment from "./DeleteComment";
@@ -12,6 +12,7 @@ interface CommentCardProps {
   likedBy: string[];
   onDeleteComment: (id: number) => void;
   onUserSelection: (username: string) => void;
+  isAuthenticated: boolean;
 }
 
 export default function CommentCard(props: CommentCardProps) {
@@ -44,6 +45,15 @@ export default function CommentCard(props: CommentCardProps) {
       setNumberOfLikes(numberOfLikes - 1);
     }
   };
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      setLike(props.likedBy.includes(getUsername()) ? "❤️" : "🤍");
+    } else {
+      setLike("🤍");
+    }
+  }, [props.isAuthenticated, props.likedBy]);
+
 
   if (isDeleted) return null;
   return (
