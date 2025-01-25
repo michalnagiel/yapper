@@ -118,7 +118,6 @@ export const addPost = async (content: string, hashtags: string[]) => {
   const payload = {
     content,
     hashtags_list: hashtags,
-    shared_post: 1,
   };
   try {
     const response = await apiClient.post("/posts/", payload, {
