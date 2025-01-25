@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Comment } from "../types/types";
-import CommentCard from "./CommentCard";
 import { getComments } from "../api/apiService";
+
 import AddComment from "./AddComment";
+import CommentCard from "./CommentCard";
+
+import { Comment } from "../types/types";
 
 import "../styles/Comments.scss";
 

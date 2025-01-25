@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "../styles/SignUpForm.scss";
 import { signUp } from "../api/apiService";
+
+import "../styles/SignUpForm.scss";
 
 const SignUpForm = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <>
       <button className="btn btn-outline-primary" onClick={openModal}>
         Sign Up
       </button>
@@ -66,7 +67,7 @@ const SignUpForm = () => {
               </label>
               <label>
                 Password:
-                <input type="text" onChange={handlePasswordChange} />
+                <input type="password" onChange={handlePasswordChange} />
               </label>
               <button
                 className="btn btn-primary"
@@ -79,7 +80,7 @@ const SignUpForm = () => {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

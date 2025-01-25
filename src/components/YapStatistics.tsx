@@ -22,6 +22,7 @@ export default function YapStatistics(props: YapStatisticsProps) {
 
   const likeClicked = async () => {
     if (like === "🤍") {
+      if (!localStorage.getItem("username")) return;
       setLike("❤️");
       await postToggleLike(props.yapId);
       setNumberOfLikes(numberOfLikes + 1);
@@ -38,7 +39,7 @@ export default function YapStatistics(props: YapStatisticsProps) {
         {like}
         {numberOfLikes}
       </span>
-      <span onClick={props.onCommentPictogramClick}>💬{props.comments}</span>
+      <span className="comment-pictogram" onClick={props.onCommentPictogramClick}>💬{props.comments}</span>
     </div>
   );
 }

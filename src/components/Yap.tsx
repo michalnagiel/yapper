@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Post } from "../types/types";
-import DeleteYap from "./DeleteYap";
+
 import Comments from "./Comments";
+import DeleteYap from "./DeleteYap";
 import YapStatistics from "./YapStatistics";
+
+import { Post } from "../types/types";
+
 import "../styles/Yap.scss";
 
 interface YapProps {

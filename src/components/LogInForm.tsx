@@ -1,11 +1,12 @@
-import "bootstrap/dist/css/bootstrap.css";
-import { getUsers, postLogin } from "../api/apiService";
 import { useState } from "react";
+import { getUsers, postLogin } from "../api/apiService";
+
 import SignUpForm from "./SignUpForm";
 
-import "../styles/LogInForm.scss";
-
 import { User } from "../types/types";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "../styles/LogInForm.scss";
 
 interface LogInFormProps {
   onAuthenticationChange: () => void;
@@ -18,16 +19,16 @@ export default function LogInForm(props: LogInFormProps) {
     !!localStorage.getItem("token")
   );
 
-  const getUserId = (username: string, users: User[]): number | null => {
+  function getUserId(username: string, users: User[]): number | null {
     for (const user of users) {
       if (user.username === username) {
         return user.id;
       }
     }
     return null;
-  };
+  }
 
-  const handleLogin = async () => {
+  async function handleLogin(): Promise<void> {
     try {
       const response = await postLogin(username, password);
       console.log("Login successful:", response);
@@ -56,9 +57,9 @@ export default function LogInForm(props: LogInFormProps) {
       console.error("Login failed:", error);
       alert(error);
     }
-  };
+  }
 
-  function handleLogout() {
+  function handleLogout(): void {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("userId");
@@ -110,9 +111,7 @@ export default function LogInForm(props: LogInFormProps) {
             >
               Log In
             </button>
-            <div className="sign-up">
-              <SignUpForm />
-            </div>
+            <SignUpForm />
           </div>
         </div>
       </>

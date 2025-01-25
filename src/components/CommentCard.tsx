@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Comment } from "../types/types";
+import { commentToggleLike } from "../api/apiService";
+
 import DeleteComment from "./DeleteComment";
 
+import { Comment } from "../types/types";
+
 import "../styles/CommentCard.scss";
-import { commentToggleLike } from "../api/apiService";
 
 interface CommentCardProps {
   comment: Comment;
@@ -55,7 +57,7 @@ export default function CommentCard(props: CommentCardProps) {
         </span>
         <span>{props.comment.content}</span>
       </div>
-      <span onClick={likeClicked}>
+      <span className="like" onClick={likeClicked}>
         {like}
         {numberOfLikes}
       </span>

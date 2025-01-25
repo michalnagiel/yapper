@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addPost } from "../api/apiService";
+
 import { Post } from "../types/types";
 
 import "../styles/CreateYap.scss";

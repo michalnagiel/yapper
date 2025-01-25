@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getPosts } from "../api/apiService";
 
-import Yap from "./Yap";
+import CreateYap from "./CreateYap";
 import LogInForm from "./LogInForm";
+import Yap from "./Yap";
 
 import { Post } from "../types/types";
-import CreateYap from "./CreateYap";
 
 import "../styles/Yaps.scss";
 
@@ -79,13 +79,25 @@ export default function Yaps(props: YapsProps) {
         <CreateYap onCreateYap={handleCreateYap} />
       ) : null}
       {selectedHashtag !== 0 ? (
-        <div className="selected-hashtag" onClick={() => setSelectedHashtag(0)}>
-          Selected hashtag: {getSelectedHashtagName()}. Click to remove.
+        <div className="selected-hashtag">
+          Selected hashtag: {getSelectedHashtagName()}.{" "}
+          <button
+            className="btn btn-outline-danger btn-sm"
+            onClick={() => setSelectedHashtag(0)}
+          >
+            Click to remove
+          </button>
         </div>
       ) : null}
       {selectedUser !== "" ? (
-        <div className="selected-hashtag" onClick={() => setSelectedUser("")}>
-          Selected user: {selectedUser}. Click to remove.
+        <div className="selected-hashtag">
+          Selected user: {selectedUser}.{" "}
+          <button
+            className="btn btn-outline-danger btn-sm"
+            onClick={() => setSelectedUser("")}
+          >
+            Click to remove
+          </button>
         </div>
       ) : null}
       {yaps.slice().map((yap) => (
